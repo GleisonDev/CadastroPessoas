@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Cadastro de Pessoas</title>
+	   <style>
+        /* Estilo para definir a cor de fundo da página inteira */
+        body {
+            background-color: #00FFFF; /* Altere a cor conforme desejado */
+        }
+    </style>
+	
+</h:head>
+<h:body>
+
+	<h:form id="frm">
+		<p:messages autoUpdate="true" />
+		
+		  <div style="background-color: #007bff; color: white; padding: 10px;">
+            <h1>Cadastro de Pessoas</h1>
+        </div>
+
+		<h:panelGrid columns="2">
+
+			<p:outputLabel value="Nome" />
+			<p:inputText size="30" value="#{pessoabean.pessoa.nome}"
+				required="true" label="Nome" />
+			<p:outputLabel value="Idade" />
+			<p:inputText size="30" value="#{pessoabean.pessoa.idade}"
+				required="true" label="Idade" />
+			<p:outputLabel value="Sexo" />
+			<p:selectOneMenu value="#{pessoabean.pessoa.sexo}" required="true"
+				label="Sexo">
+				<f:selectItem itemLabel="Selecione o seu sexo"
+					noSelectionOption="true" />
+				<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+				<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+				<f:selectItem itemLabel="Não responder" itemValue="Não responder" />
+			</p:selectOneMenu>
+			<p:outputLabel value="Email" />
+			<p:inputText size="30" value="#{pessoabean.pessoa.email}"
+				required="true" label="Email" />
+			<p:outputLabel value="Estado" />
+			<p:selectOneMenu value="#{pessoabean.pessoa.estado}" required="true"
+				label="Estado">
+				<f:selectItem itemLabel="Selecione o seu Estado"
+					noSelectionOption="true" />
+				<f:selectItem itemLabel="CE" itemValue="CE" />
+				<f:selectItem itemLabel="SP" itemValue="SP" />
+				<f:selectItem itemLabel="RJ" itemValue="RJ" />
+			</p:selectOneMenu>
+			<p:outputLabel value="Cidade" />
+			<p:inputText size="30" value="#{pessoabean.pessoa.cidade}"
+				required="true" label="Cidade" />
+				<p:outputLabel value="Logradouro" />
+			<p:inputText size="30" value="#{pessoabean.pessoa.logradouro}"
+				required="true" label="Logradouro" />
+				<p:outputLabel value="Numero" />
+			<p:inputText size="30" value="#{pessoabean.pessoa.numero}"
+				required="true" label="Numero" />
+				<p:outputLabel value="Cep" />
+			<p:inputText size="30" value="#{pessoabean.pessoa.cep}"
+				required="true" label="Cep" />
+			<p:outputLabel />
+			<p:commandButton value="Cadastrar" action="#{pessoabean.adicionar}"
+				update="frm tabela" style="margin-top: 10px" />
+
+		</h:panelGrid>
+
+		<p:dataTable value="#{pessoabean.pessoas}" var="p" id="tabela"
+			paginator="true" rows="5" style="margin-top: 10px">
+
+			
+			<p:column headerText="Nome">
+				<p:outputLabel value="#{p.nome}" />
+			</p:column>
+			<p:column headerText="Idade">
+				<p:outputLabel value="#{p.idade}" />
+			</p:column>
+			<p:column headerText="Sexo">
+				<p:outputLabel value="#{p.sexo}" />
+			</p:column>
+			<p:column headerText="Email">
+				<p:outputLabel value="#{p.email}" />
+			</p:column>
+			<p:column headerText="Cidade">
+				<p:outputLabel value="#{p.cidade}" />
+			</p:column>
+			<p:column headerText="Logradouro">
+				<p:outputLabel value="#{p.logradouro}" />
+			</p:column>
+			<p:column headerText="Numero">
+				<p:outputLabel value="#{p.numero}" />
+			</p:column>
+			<p:column headerText="Cep">
+				<p:outputLabel value="#{p.cep}" />
+			</p:column>
+			<p:column headerText="">
+				<p:commandButton icon="ui-icon-pencil" update="@form"
+					process="@this">
+					<f:setPropertyActionListener value="#{p}"
+						target="#{pessoabean.pessoa}" />
+				</p:commandButton>
+				<p:commandButton action="#{pessoabean.excluir}" icon="ui-icon-trash"
+					update="tabela" process="@this">
+					<f:setPropertyActionListener value="#{p}"
+						target="#{pessoabean.pessoa}" />
+				</p:commandButton>
+
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>
